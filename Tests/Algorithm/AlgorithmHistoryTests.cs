@@ -53,7 +53,9 @@ namespace QuantConnect.Tests.Algorithm
             {
                 fillForwardResolution = resolution;
             }
-            Assert.AreEqual(2, _testHistoryProvider.HistryRequests.Count);
+
+            var expectedCount = resolution == Resolution.Hour || resolution == Resolution.Daily ? 1 : 2;
+            Assert.AreEqual(expectedCount, _testHistoryProvider.HistryRequests.Count);
             Assert.AreEqual(Symbols.SPY, _testHistoryProvider.HistryRequests.First().Symbol);
             Assert.AreEqual(resolution, _testHistoryProvider.HistryRequests.First().Resolution);
             Assert.IsFalse(_testHistoryProvider.HistryRequests.First().IncludeExtendedMarketHours);
@@ -78,7 +80,9 @@ namespace QuantConnect.Tests.Algorithm
             {
                 fillForwardResolution = resolution;
             }
-            Assert.AreEqual(2, _testHistoryProvider.HistryRequests.Count);
+
+            var expectedCount = resolution == Resolution.Hour || resolution == Resolution.Daily ? 1 : 2;
+            Assert.AreEqual(expectedCount, _testHistoryProvider.HistryRequests.Count);
             Assert.AreEqual(Symbols.SPY, _testHistoryProvider.HistryRequests.First().Symbol);
             Assert.AreEqual(resolution, _testHistoryProvider.HistryRequests.First().Resolution);
             Assert.IsFalse(_testHistoryProvider.HistryRequests.First().IncludeExtendedMarketHours);
