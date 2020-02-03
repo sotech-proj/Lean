@@ -72,8 +72,8 @@ namespace QuantConnect.Packets
             RefillAmount = DefaultRefillAmount;
             TimeIntervalMinutes = DefaultTimeInterval;
 
-            var defaultCapacity = Config.GetInt("scheduled-event-leaky-bucket-capacity", 2 * 60);
-            var defaultTimeInterval = Config.GetInt("scheduled-event-leaky-bucket-time-interval-minutes", 1440);
+            var defaultCapacity = Config.GetInt("scheduled-event-leaky-bucket-capacity", 10 * 60);
+            var defaultTimeInterval = Config.GetInt("scheduled-event-leaky-bucket-time-interval-minutes", 10);
             var defaultRefillAmount = Config.GetInt("scheduled-event-leaky-bucket-refill-amount", (int)Math.Ceiling(DefaultCapacity / 7.0));
 
             Logging.Log.Trace($"LeakyBucketControlParameters {defaultCapacity} {defaultTimeInterval} {defaultRefillAmount}");
