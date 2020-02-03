@@ -171,6 +171,7 @@ namespace QuantConnect.Lean.Engine
             {
                 // reset our timer on each loop
                 TimeLimit.StartNewTimeStep();
+                Log.Trace($"AdditionalTimeBucket: {TimeLimit.AdditionalTimeBucket.Capacity} {TimeLimit.AdditionalTimeBucket.AvailableTokens}");
 
                 //Check this backtest is still running:
                 if (_algorithm.Status != AlgorithmStatus.Running)
@@ -1215,8 +1216,13 @@ namespace QuantConnect.Lean.Engine
             Log.Trace("AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: " +
                 $"Capacity: {controls.Capacity} " +
                 $"RefillAmount: {controls.RefillAmount} " +
-                $"TimeInterval: {controls.TimeIntervalMinutes}"
-            );
+                $"TimeInterval: {controls.TimeIntervalMinutes}");
+
+            Log.Trace("AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: " +
+                $"Capacity: {Config.GetInt("scheduled-event-leaky-bucket-capacity", 0)} " +
+                $"RefillAmount: {Config.GetInt("scheduled-event-leaky-bucket-time-interval-minutes", 0)} " +
+                $"TimeInterval: {Config.GetInt("scheduled-event-leaky-bucket-refill-amount", 0)}");
+
 
             // these parameters view 'minutes' as the resource being rate limited. the capacity is the total
             // number of minutes available for burst operations and after controls.TimeIntervalMinutes time
