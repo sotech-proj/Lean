@@ -1295,6 +1295,29 @@ namespace QuantConnect.Algorithm
         }
 
         /// <summary>
+        /// Creates a new RSI Bull Bear indicator.
+        /// The indicator will be automatically updated on the given resolution.
+        /// </summary>
+        /// <param name="symbol">The symbol whose RSI Bull Bear signal we're computing</param>
+        /// <param name="resolution">The resolution.</param>
+        /// <param name="rsi">The RelativeStrengthIndex indicator oscillating between 0 and 100 based</param>
+        /// <param name="selector">Selects a value from the BaseData to send into the indicator, if null defaults to the Value property of BaseData (x => x.Value)</param>
+        /// <returns>The RSI Bull Bear indicator for the requested symbol.</returns>
+        public RSIBullBearIndicator RSIBB(Symbol symbol, RelativeStrengthIndex rsi, Resolution? resolution = null, Func<IBaseData, decimal> selector = null)
+        {
+            var name = CreateIndicatorName(symbol, $"RSIBB({rsi.WarmUpPeriod})", resolution);
+            var rsiBullBear = new RSIBullBearIndicator(name, rsi); 
+            RegisterIndicator(symbol, rsiBullBear, resolution, selector);
+
+            if (EnableAutomaticIndicatorWarmUp)
+            {
+                WarmUpIndicator(symbol, rsiBullBear, resolution);
+            }
+
+            return rsiBullBear;
+        }
+
+        /// <summary>
         /// Creates an SimpleMovingAverage indicator for the symbol. The indicator will be automatically
         /// updated on the given resolution.
         /// </summary>

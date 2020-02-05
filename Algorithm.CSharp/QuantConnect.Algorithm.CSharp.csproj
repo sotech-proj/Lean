@@ -179,6 +179,7 @@
     <Compile Include="ObjectStoreExampleAlgorithm.cs" />
     <Compile Include="OnEndOfDayAddDataRegressionAlgorithm.cs" />
     <Compile Include="ResolutionSwitchingAlgorithm.cs" />
+    <Compile Include="StandardRelativeStrengthIndicatorAlgorithm.cs" />
     <Compile Include="TimeRulesDefaultTimeZoneRegressionAlgorithm.cs" />
     <Compile Include="SetHoldingsMultipleTargetsRegressionAlgorithm.cs" />
     <Compile Include="SetHoldingsMarketOnOpenRegressionAlgorithm.cs" />

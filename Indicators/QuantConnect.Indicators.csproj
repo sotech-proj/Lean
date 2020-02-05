@@ -179,6 +179,7 @@
     <Compile Include="DoubleExponentialMovingAverage.cs" />
     <Compile Include="PythonIndicator.cs" />
     <Compile Include="IntradayVwap.cs" />
+    <Compile Include="RSIBullBearIndicator.cs" />
     <Compile Include="WilderMovingAverage.cs" />
     <Compile Include="FractalAdaptiveMovingAverage.cs" />
     <Compile Include="FilteredIdentity.cs" />
