@@ -15,6 +15,8 @@ namespace QuantConnect.Tests.Indicators
             RSIBullBearIndicator indicator = new RSIBullBearIndicator("AAPL", rsi);
             IndicatorDataPoint dataPoint = new IndicatorDataPoint(startDate, Convert.ToDecimal(GetRandomNumber(127.8, 398.6)));
 
+            Assert.False(indicator.BearishSignalTriggered());
+
             //prime up indicator with lots of data points
             for (int i = 0; i < 250; i++)
             {
@@ -42,11 +44,14 @@ namespace QuantConnect.Tests.Indicators
             RSIBullBearIndicator indicator = new RSIBullBearIndicator("AAPL", rsi);
             IndicatorDataPoint dataPoint = new IndicatorDataPoint(startDate, Convert.ToDecimal(GetRandomNumber(127.8, 398.6)));
 
+            Assert.False(indicator.BullishSignalTriggered());
+
             //prime up indicator with lots of data points
             for (int i = 0; i < 250; i++)
             {
                 rsi.Update(dataPoint);
                 indicator.Update(dataPoint);
+                Assert.False(indicator.BullishSignalTriggered());
                 dataPoint = new IndicatorDataPoint(startDate = startDate.AddDays(1), Convert.ToDecimal(GetRandomNumber(127.8, 398.6)));
             }
             
